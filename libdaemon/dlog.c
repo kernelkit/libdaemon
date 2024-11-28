@@ -41,6 +41,7 @@ void daemon_set_verbosity(int verbosity_prio) {
         daemon_log(LOG_ERR, "The value %d is not a valid priority value", verbosity_prio);
 
     daemon_verbosity_level = verbosity_prio & LOG_PRIMASK;
+    setlogmask(LOG_UPTO(verbosity_prio));
 }
 
 void daemon_logv(int prio, const char* template, va_list arglist) {
